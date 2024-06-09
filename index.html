@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation IFI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Simulation de l'IFI</h1>
+        <form id="ifi-form">
+            <div class="form-group">
+                <label for="residence-principale">Valeur de la résidence principale :</label>
+                <input type="number" id="residence-principale" name="residence-principale" required>
+            </div>
+            <div class="form-group">
+                <label for="autres-biens">Valeur des autres biens immobiliers :</label>
+                <input type="number" id="autres-biens" name="autres-biens" required>
+            </div>
+            <div class="form-group">
+                <label for="taxe-fonciere">Estimation de la taxe foncière :</label>
+                <input type="number" id="taxe-fonciere" name="taxe-fonciere" required>
+            </div>
+            <div id="emprunts-container">
+                <h3>Emprunts</h3>
+                <div class="emprunt">
+                    <label for="emprunt-montant-1">Montant de l'emprunt :</label>
+                    <input type="number" id="emprunt-montant-1" class="emprunt-montant" required>
+                    <label for="emprunt-plafonne-1">Plafonné :</label>
+                    <input type="checkbox" id="emprunt-plafonne-1" class="emprunt-plafonne">
+                </div>
+            </div>
+            <button type="button" id="ajouter-emprunt">Ajouter un emprunt</button>
+            <button type="submit">Calculer l'IFI</button>
+        </form>
+        <div id="resultat"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
