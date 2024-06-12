@@ -30,25 +30,36 @@ function calculGeneral() {
     const autresBiens = parseFloat(document.getElementById('autres-biens').value);
     const taxeFonciere = parseFloat(document.getElementById('taxe-fonciere').value);
 
-    let empruntsTotal = 0;
+    let empruntsAvecPlafond = 0;
+    let empruntSansPlafond = taxeFonciere;
 
     document.querySelectorAll('.emprunt').forEach((emprunt, index) => {
         const montant = parseFloat(emprunt.querySelector('.emprunt-montant').value);
         const plafonne = emprunt.querySelector('.emprunt-plafonne').checked;
         
         if (plafonne) {
-            empruntsTotal += Math.min(montant, residencePrincipale);
+            empruntsAvecPlafond += montant;
         } else {
-            empruntsTotal += montant;
+            empruntSansPlafond += montant;
         }
     });
 
-    const valeurNetteImmo = (residencePrincipale * 0.7) + autresBiens - empruntsTotal;
+    const valeurNetteImmo = (residencePrincipale * 0.7) + autresBiens;
 
-    const baseImposable = valeurNetteImmo - taxeFonciere;
+    // calcul du plafonnenement de l'emprunt
+    if (valeurNetteImmo >= 5000000 && empruntsAvecPlafond > valeurNetteImmo * 0.6) {
+        empruntsAvecPlafond = valeurNetteImmo * 0.6 + (empruntsAvecPlafond - valeurNetteImmo * 0.6) * 0.5;
+    }
 
-    let ifi = calculerIFI(baseImposable);
-    document.getElementById('resultat').innerText = `Votre IFI estimé est de : ${ifi} €`;
+    const totalEmprunt = empruntsAvecPlafond + empruntSansPlafond;
+
+    const baseImposable = valeurNetteImmo - totalEmprunt;
+
+    let ifiTheorique = calculerIFI(baseImposable);
+    document.getElementById('base-imposable').innerText = `Votre base imposable est de : ${baseImposable} €`;
+    document.getElementById('resultat-ifi-theorique').innerText = `Votre IFI théorique est de : ${ifiTheorique} €`;
+    let ifi = calculerIFI(baseImposable-ifiTheorique);
+    document.getElementById('resultat-ifi').innerText = `Votre IFI est de : ${ifi} €`;
 }
 
 function calculerIFI(baseImposable) {

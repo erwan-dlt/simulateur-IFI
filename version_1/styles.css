@@ -1,0 +1,120 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 95%;
+    height: 95%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+.panneau-gauche {
+    width: 25%;
+    padding: 20px;
+    border-right: 1px solid #e0e0e0;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.panneau-gauche form {
+    height: 100%;
+}
+
+.groupe-formulaire {
+    margin-bottom: 15px;
+}
+
+.groupe-formulaire label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.groupe-formulaire input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.groupe-formulaire input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.groupe-checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.panneau-droit {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+.panneau-droit-haut {
+    height: 50%;
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.panneau-droit-bas {
+    height: 50%;
+    padding: 20px;
+}
+
+.cases-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px 0;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f0f0f5;
+}
+
+.cases-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.cases-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+.cases-container::-webkit-scrollbar-track {
+    background-color: #f0f0f5;
+}
+
+.case {
+    min-width: 25%;
+    max-width: 25%;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    margin-right: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.case-header {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.case-content p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #333;
+}
