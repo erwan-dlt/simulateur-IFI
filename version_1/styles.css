@@ -37,11 +37,10 @@ body {
 .groupe-formulaire label {
     display: block;
     margin-bottom: 5px;
-    font-weight: bold;
 }
 
 .groupe-formulaire input[type="number"] {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     margin-top: 5px;
     border: 1px solid #ddd;
@@ -97,14 +96,14 @@ body {
 }
 
 .case {
-    min-width: 25%;
-    max-width: 25%;
     background-color: #e0e0e0;
     border-radius: 10px;
     margin-right: 10px;
-    padding: 10px;
+    padding: 15px;
     box-sizing: border-box;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: inline-block;
+    flex-shrink: 0;
 }
 
 .case-header {

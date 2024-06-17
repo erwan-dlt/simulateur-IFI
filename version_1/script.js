@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const residencePrincipaleValue = parseFloat(residencePrincipaleInput.value) || 0;
         const autresBiensValue = parseFloat(autresBiensInput.value) || 0;
         const totalActif = (residencePrincipaleValue * 0.7) + autresBiensValue; // Abattement 30% RP
-        const augmentationActif = parseFloat(augmentationActifInput.value) || 0;
+        const augmentationActif = parseFloat(augmentationActifInput.value) / 100 || 0;
         const taxeFonciere = parseFloat(taxeFonciereInput.value) || 0;
 
         const anneeDebutPret = parseInt(debutPretInput.value, 10) || 0;
@@ -36,13 +36,14 @@ document.addEventListener("DOMContentLoaded", function() {
         const dureePret = anneeFinPret - anneeDebutPret;
         const reductionAnnuellePret = montantPret / dureePret;
         const plafondPret = plafondPretInput.checked;
-        const taegPret = parseFloat(taegPretInput.value) || 0;
+        const taegPret = parseFloat(taegPretInput.value) / 100 || 0;
 
         const anneeDebutPretTravaux = parseInt(debutPretTravauxInput.value, 10) || 0;
         const anneeFinPretTravaux = parseInt(finPretTravauxInput.value, 10) || 0;
         const montantPretTravaux = parseFloat(montantPretTravauxInput.value) || 0;
+        const dureePretTravaux = anneeFinPretTravaux - anneeDebutPretTravaux;
         const plafondPretTravaux = plafondPretTravauxInput.checked;
-        const taegPretTravaux = parseFloat(taegPretTravauxInput.value) || 0;
+        const taegPretTravaux = parseFloat(taegPretTravauxInput.value) / 100 || 0;
 
         if (anneeDebutPret && anneeFinPret && anneeFinPret >= anneeDebutPret) {
             casesContainer.innerHTML = ""; // Supprimer les cases existantes
@@ -93,17 +94,18 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                 `;
                 casesContainer.appendChild(caseElement);
-
-                // Réduire le montant du prêt pour l'année suivante
+                
+                // Calcul total de l'IFI
                 ifiAvecEmprunt += ifi;
                 ifiSansEmprunt += calculerIFI(totalActifActuel - taxeFonciere - calculerIFI(totalActifActuel - taxeFonciere));
+                // Réduire le montant du prêt et augmentation de l'actif pour l'année suivante
                 montantPretActuel -= reductionAnnuellePret;
                 totalActifActuel *= 1 + augmentationActif;
                 }
 
             // Calcul du coût des emprunts
-            const coutEmpruntAcquisition = montantPret * taegPret;
-            const coutEmpruntTravaux = montantPretTravaux * taegPretTravaux;
+            const coutEmpruntAcquisition = montantPret * taegPret * dureePret;
+            const coutEmpruntTravaux = montantPretTravaux * taegPretTravaux * dureePretTravaux;
             const coutTotal = ifiAvecEmprunt + coutEmpruntAcquisition + coutEmpruntTravaux;
 
             // Création des résultats
